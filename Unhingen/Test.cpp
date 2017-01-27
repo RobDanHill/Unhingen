@@ -17,7 +17,7 @@ int main ( int argc, char *argv[] ) {
 		Vertex( glm::vec3( 0.0f, 0.5f, 0.0f ) ),
 		Vertex( glm::vec3( 0.5f, 0.5f, 0.0f	) )
 	};
-	Mesh mesh( vertices, 3 );
+	//Mesh mesh( vertices, 3 );
 	std::string fileContents = utils::LoadFile( "./Res/Hello.txt" );
 	Display win( WINDOW_WIDTH, WINDOW_HEIGHT, "Test Window" );
 	while ( win.IsRunning() ) {

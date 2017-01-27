@@ -20,6 +20,7 @@ Display::Display ( const u_short width, const u_short height, const std::string&
 	}
 	InitGLEW();
 	glEnable( GL_DEPTH_TEST );
+	glEnable( GL_CULL_FACE );
 	glCullFace( GL_BACK );
 }
 
