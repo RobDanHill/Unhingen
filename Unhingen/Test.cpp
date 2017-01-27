@@ -4,12 +4,20 @@
 #include <string>
 
 #include "Display\Display.h"
+#include "Common\Mesh.h"
+#include "Common\Vertex.h"
 #include "Utils\IO.h"
 
 #define WINDOW_WIDTH 800
 #define WINDOW_HEIGHT 600
 
 int main ( int argc, char *argv[] ) {
+	Vertex vertices[] = {
+		Vertex( glm::vec3( -0.5f, -0.5f, 0.0f ) ),
+		Vertex( glm::vec3( 0.0f, 0.5f, 0.0f ) ),
+		Vertex( glm::vec3( 0.5f, 0.5f, 0.0f	) )
+	};
+	Mesh mesh( vertices, 3 );
 	std::string fileContents = utils::LoadFile( "./Res/Hello.txt" );
 	Display win( WINDOW_WIDTH, WINDOW_HEIGHT, "Test Window" );
 	while ( win.IsRunning() ) {

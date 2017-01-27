@@ -19,11 +19,13 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Common\Mesh.cpp" />
     <ClCompile Include="Common\Shader.cpp" />
     <ClCompile Include="Display\Display.cpp" />
     <ClCompile Include="Test.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Common\Mesh.h" />
     <ClInclude Include="Common\Shader.h" />
     <ClInclude Include="Common\Types.h" />
     <ClInclude Include="Common\Vertex.h" />
@@ -31,6 +33,7 @@
     <ClInclude Include="System\Error.h" />
     <ClInclude Include="System\Out.h" />
     <ClInclude Include="Utils\IO.h" />
+    <ClInclude Include="Utils\ShaderUtils.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{3D5ACE59-CAD7-454B-A212-BD3A86377B8C}</ProjectGuid>
