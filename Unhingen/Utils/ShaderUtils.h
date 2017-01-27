@@ -7,14 +7,18 @@
 
 namespace utils {
 
+	/* Declare these here to avoid "identifier not found" errors */
+	static void ShaderError ( GLuint shader, GLenum flag, boolean isProgram, const std::string& msg );
+	static void CheckShaderCompilation( GLuint shader );
+
 	static GLuint CreateShaderProgram ( const std::string& shaderSource, GLenum type ) {
 		GLuint newShader = glCreateShader( type );
 		if ( newShader == 0 ) {
 			err::GLEW_ErrMsg( "An error occurred creating the shader object!", glGetError() );
 		}
-		const GLchar *source = shaderSource.c_str();
-		GLint length[] = { shaderSource.length() };
-		glShaderSource( newShader, 1, &source, length );
+		const GLchar *source[] = { shaderSource.c_str() };
+		GLint length[] = { ( GLint ) shaderSource.length() };
+		glShaderSource( newShader, 1, source, length );
 		glCompileShader( newShader );
 		CheckShaderCompilation( newShader );
 		return newShader;
