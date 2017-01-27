@@ -19,13 +19,17 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Common\Shader.cpp" />
     <ClCompile Include="Display\Display.cpp" />
     <ClCompile Include="Test.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Common\Shader.h" />
     <ClInclude Include="Common\Types.h" />
+    <ClInclude Include="Common\Vertex.h" />
     <ClInclude Include="Display\Display.h" />
     <ClInclude Include="System\Error.h" />
+    <ClInclude Include="System\Out.h" />
     <ClInclude Include="Utils\IO.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

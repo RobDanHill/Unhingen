@@ -13,7 +13,7 @@ int main ( int argc, char *argv[] ) {
 	std::string fileContents = utils::LoadFile( "./Res/Hello.txt" );
 	Display win( WINDOW_WIDTH, WINDOW_HEIGHT, "Test Window" );
 	while ( win.IsRunning() ) {
-		win.Clear( 1.0f, 0.0f, 0.0f, 1.0f );	// Clear the window with red
+		win.Clear( 0.0f, 0.0f, 0.0f, 1.0f );	// Clear the window with red
 		win.Update();
 		for ( SDL_Event e; SDL_PollEvent( &e ); ) {
 			switch ( e.type ) {
