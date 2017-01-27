@@ -15,4 +15,8 @@ namespace err {
 		std::cerr << msg << "\tGLEW Error: " << glewGetErrorString( error ) << std::endl;
 	}
 
+	static void ErrMsg ( const std::string& msg ) {
+		std::cerr << msg << std::endl;
+	}
+
 }
