@@ -14,16 +14,16 @@
 
 int main ( int argc, char *argv[] ) {
 	Display win( WINDOW_WIDTH, WINDOW_HEIGHT, "Test Window" );
-	Shader shader( "./Res/Shaders/Test.vs", "./Res/Shaders/Test.fs" );
+	Shader shader( "./Res/Shaders/Test" );
 	Vertex vertices[] = {
-		Vertex( glm::vec3( -0.5f, -0.5f, 1.0f ) ),
-		Vertex( glm::vec3( 0.0f, 0.5f, 1.0f ) ),
-		Vertex( glm::vec3( 0.5f, 0.5f, 1.0f ) )
+		Vertex( glm::vec3( -0.5f, -0.5f, 0.0f ) ),
+		Vertex( glm::vec3( 0.0f, 0.5f, 0.0f ) ),
+		Vertex( glm::vec3( 0.5f, -0.5f, 0.0f ) )
 	};
 	Mesh mesh( vertices, sizeof( vertices ) / sizeof( vertices[0] ) );
-	std::string fileContents = utils::LoadFile( "./Res/Hello.txt" );
+	//std::string fileContents = utils::LoadFile( "./Res/Hello.txt" );
 	while ( win.IsRunning() ) {
-		win.Clear( 0.0f, 0.0f, 0.0f, 1.0f );	// Clear the window with red
+		win.Clear( 0.0f, 0.15f, 0.3f, 1.0f );	// Clear the window with light-blue
 
 		shader.Enable();
 		mesh.Draw();

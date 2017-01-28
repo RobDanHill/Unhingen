@@ -16,9 +16,9 @@ namespace utils {
 		if ( newShader == 0 ) {
 			err::GLEW_ErrMsg( "An error occurred creating the shader object!", glGetError() );
 		}
-		const GLchar *source[] = { shaderSource.c_str() };
-		GLint length[] = { ( GLint ) shaderSource.length() };
-		glShaderSource( newShader, 1, source, length );
+		const GLchar *sourceStrings[] = { shaderSource.c_str() };
+		GLint sourceStringsLengths[] = { ( GLint ) shaderSource.length() };
+		glShaderSource( newShader, 1, sourceStrings, sourceStringsLengths );
 		glCompileShader( newShader );
 		CheckShaderCompilation( newShader );
 		return newShader;

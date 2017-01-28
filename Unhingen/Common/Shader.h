@@ -6,7 +6,7 @@
 class Shader {
 	public:
 		Shader ( const std::string& fileName );
-		Shader ( const std::string& vertex, const std::string& fragment );
+		Shader ( const std::string& vertFileName, const std::string& fragFileName );
 		void Enable ();
 		virtual ~Shader ();
 	private:

@@ -3,10 +3,10 @@
 
 Mesh::Mesh ( Vertex *vertices, u_int numVertices ) {
 	drawCount = numVertices;
-	std::vector<Vertex> positions;
+	/*std::vector<Vertex> positions;
 	for ( u_int i = 0; i < numVertices; i++ ) {
 		positions.push_back( vertices[i].GetPosition() );
-	}
+	}*/
 
 	glGenVertexArrays( 1, &vao );
 	glBindVertexArray( vao );
@@ -15,7 +15,7 @@ Mesh::Mesh ( Vertex *vertices, u_int numVertices ) {
 	glGenBuffers( NUM_BUFFERS, vbo );
 
 	glBindBuffer( GL_ARRAY_BUFFER, vbo[POSITION] );
-	glBufferData( GL_ARRAY_BUFFER, positions.size() * sizeof( positions[0] ), &positions[0], GL_STATIC_DRAW );
+	glBufferData( GL_ARRAY_BUFFER, numVertices * sizeof( vertices[0] ), vertices, GL_STATIC_DRAW );
 
 	glEnableVertexAttribArray( 0 );
 	glVertexAttribPointer( 0, 3, GL_FLOAT, GL_FALSE, 0, 0 );
