@@ -14,7 +14,7 @@
 
 int main ( int argc, char *argv[] ) {
 	Display win( WINDOW_WIDTH, WINDOW_HEIGHT, "Test Window" );
-	Shader shader( "./Res/Shaders/Test" );
+	Shader shader( "./Res/Shaders/Test.vs", "./Res/Shaders/Test.fs" );
 	Vertex vertices[] = {
 		Vertex( glm::vec3( -0.5f, -0.5f, 0.0f ) ),
 		Vertex( glm::vec3( 0.0f, 0.5f, 0.0f ) ),
@@ -25,8 +25,10 @@ int main ( int argc, char *argv[] ) {
 	while ( win.IsRunning() ) {
 		win.Clear( 0.0f, 0.15f, 0.3f, 1.0f );	// Clear the window with light-blue
 
-		shader.Enable();
+		shader.Bind();
+		shader.SetGLUniform3f( "color", glm::vec3( 1.0f, 0.0f, 0.0f ) );
 		mesh.Draw();
+		shader.Unbind();
 
 		win.Update();
 		for ( SDL_Event e; SDL_PollEvent( &e ); ) {
