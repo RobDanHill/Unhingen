@@ -36,7 +36,7 @@ namespace utils {
 		if ( success == GL_FALSE ) {
 			if ( isProgram ) glGetProgramInfoLog( shader, sizeof( errorString ), null, errorString );
 			else glGetShaderInfoLog( shader, sizeof( errorString ), null, errorString );
-			err::GLEW_ErrMsg( msg + "\t'" + errorString + "'", glGetError() );
+			err::GLEW_ErrMsg( msg + " '" + errorString + "'", glGetError() );
 		}
 	}
 

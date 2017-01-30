@@ -21,12 +21,14 @@
   <ItemGroup>
     <ClCompile Include="Common\Mesh.cpp" />
     <ClCompile Include="Common\Shader.cpp" />
+    <ClCompile Include="Common\Texture2D.cpp" />
     <ClCompile Include="Display\Display.cpp" />
     <ClCompile Include="Test.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Common\Mesh.h" />
     <ClInclude Include="Common\Shader.h" />
+    <ClInclude Include="Common\Texture2D.h" />
     <ClInclude Include="Common\Types.h" />
     <ClInclude Include="Common\Vertex.h" />
     <ClInclude Include="Display\Display.h" />

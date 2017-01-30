@@ -25,12 +25,15 @@ Display::Display ( const u_short width, const u_short height, const std::string&
 }
 
 /*
- * Initialize SDL and all buffer sizes
+ * Initialize SDL, SDL_image, and all buffer sizes
  */
 void Display::InitSDL () {
 	if ( SDL_Init( SDL_INIT_EVERYTHING ) < 0 ) {
 		err::SDL_ErrMsg( "SDL failed to initialize!" );
 		running = false;
+	}
+	if ( IMG_Init( IMG_INIT_PNG ) < 0 ) {
+		err::SDL_image_ErrMsg( "SDL_image failed to initialize!" );
 	}
 	SDL_GL_SetAttribute( SDL_GL_RED_SIZE, 8 );
 	SDL_GL_SetAttribute( SDL_GL_GREEN_SIZE, 8 );
@@ -64,5 +67,6 @@ void Display::Update () {
 Display::~Display () {
 	SDL_GL_DeleteContext( glContext );
 	SDL_DestroyWindow( window );
+	IMG_Quit();
 	SDL_Quit();
 }
