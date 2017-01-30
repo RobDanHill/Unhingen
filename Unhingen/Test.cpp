@@ -26,7 +26,7 @@ int main ( int argc, char *argv[] ) {
 		win.Clear( 0.0f, 0.15f, 0.3f, 1.0f );	// Clear the window with light-blue
 
 		shader.Bind();
-		shader.SetGLUniform3f( "color", glm::vec3( 1.0f, 0.0f, 0.0f ) );
+		shader.SetGLUniform3f( "color", 1.0f, 0.0f, 0.0f );
 		mesh.Draw();
 		shader.Unbind();
 
