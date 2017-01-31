@@ -35,6 +35,7 @@ Shader::Shader ( const std::string& vertFileName, const std::string& fragFileNam
 	glAttachShader( program, vertexShader );
 	glAttachShader( program, fragmentShader );
 	glBindAttribLocation( program, 0, "position" );
+	glBindAttribLocation( program, 1, "texCoord" );
 	/* Going to need to bind the attrib locations of the texCoords and normals too */
 	glLinkProgram( program );
 	utils::ShaderError( program, GL_LINK_STATUS, true, "Program failed linking!" );

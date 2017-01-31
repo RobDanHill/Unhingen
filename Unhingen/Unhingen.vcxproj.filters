@@ -63,4 +63,8 @@
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Res\Shaders\Texture.vs" />
+    <None Include="Res\Shaders\Texture.fs" />
+  </ItemGroup>
 </Project>

@@ -37,6 +37,10 @@
     <ClInclude Include="Utils\IO.h" />
     <ClInclude Include="Utils\ShaderUtils.h" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Res\Shaders\Texture.fs" />
+    <None Include="Res\Shaders\Texture.vs" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{3D5ACE59-CAD7-454B-A212-BD3A86377B8C}</ProjectGuid>
     <RootNamespace>Unhingen</RootNamespace>
