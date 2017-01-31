@@ -17,8 +17,8 @@ int main ( int argc, char *argv[] ) {
 	Display win( WINDOW_WIDTH, WINDOW_HEIGHT, "Test Window" );
 	Shader shader( "./Res/Shaders/Texture" );
 	Vertex vertices[] = {
-		Vertex( glm::vec3( -0.5f, -0.5f, 0.0f ), glm::vec2( 0.0f, 0.0f ) ),
-		Vertex( glm::vec3( 0.0f, 0.5f, 0.0f ), glm::vec2( 1.0f, 0.0f ) ),
+		Vertex( glm::vec3( -0.5f, -0.5f, 0.0f ), glm::vec2( 0.0f, 1.0f ) ),
+		Vertex( glm::vec3( 0.0f, 0.5f, 0.0f ), glm::vec2( 0.5f, 0.0f ) ),
 		Vertex( glm::vec3( 0.5f, -0.5f, 0.0f ), glm::vec2( 1.0f, 1.0f ) )
 	};
 	Mesh mesh( vertices, sizeof( vertices ) / sizeof( vertices[0] ) );
@@ -29,7 +29,6 @@ int main ( int argc, char *argv[] ) {
 
 		shader.Bind();
 		texture.Bind( 0 );
-		shader.SetGLUniform3f( "color", 1.0f, 0.0f, 0.0f );
 		mesh.Draw();
 		shader.Unbind();
 
