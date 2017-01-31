@@ -12,7 +12,7 @@ class Mesh {
 		void Draw ();
 		virtual ~Mesh ();
 	private:
-		enum { POSITION, NUM_BUFFERS };
+		enum { POSITION, TEXCOORD, NUM_BUFFERS };
 		GLuint	vao;
 		GLuint	vbo[NUM_BUFFERS];
 		u_int	drawCount;
