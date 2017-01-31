@@ -4,10 +4,10 @@
 #include <string>
 
 #include "Display\Display.h"
-#include "Common\Mesh.h"
-#include "Common\Vertex.h"
-#include "Common\Shader.h"
-#include "Common\Texture2D.h"
+#include "Common\Graphics\Mesh.h"
+#include "Common\Graphics\Vertex.h"
+#include "Common\Graphics\Shader.h"
+#include "Common\Graphics\Texture2D.h"
 #include "Utils\IO.h"
 
 #define WINDOW_WIDTH 800

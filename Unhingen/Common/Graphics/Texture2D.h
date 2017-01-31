@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Types.h"
+#include "..\Common\Types.h"
 #include <GL\glew.h>
 #include <string>
 
