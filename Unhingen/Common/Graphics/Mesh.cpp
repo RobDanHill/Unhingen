@@ -14,7 +14,7 @@ Mesh::Mesh ( Texture2DVertex *vertices, u_int numVertices ) {
 	glBindVertexArray( vao );
 
 	/* Now, generate the correct number of vbo's */
-	glGenBuffers( NUM_BUFFERS, vbo );
+	glGenBuffers( 1, vbo );
 
 	glBindBuffer( GL_ARRAY_BUFFER, vbo[POSITION] );
 	glBufferData( GL_ARRAY_BUFFER, positions.size() * sizeof( positions.front() ), &positions.front(), GL_STATIC_DRAW );

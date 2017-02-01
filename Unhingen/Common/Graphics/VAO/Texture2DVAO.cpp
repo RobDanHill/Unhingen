@@ -20,20 +20,20 @@ Texture2DVAO::Texture2DVAO ( const std::vector<Texture2DVertex>& vertices ) {
 	glGenVertexArrays( 1, &vao );
 	glBindVertexArray( vao ); //---------------------------------------------------
 
-	glGenBuffers( NUM_BUF, vbo );
+	glGenBuffers( NUM_BUF-1, vbo );
 
 	/* Specify buffer data */
-	glBindBuffer( GL_TEXTURE_2D, vbo[POSITION_BUF] );
-	glBufferData( GL_TEXTURE_2D, positions.size() * sizeof( positions.front() ), &positions.front(), GL_STATIC_DRAW );
+	glBindBuffer( GL_ARRAY_BUFFER, vbo[POSITION_BUF] );
+	glBufferData( GL_ARRAY_BUFFER, positions.size() * sizeof( positions.front() ), &positions.front(), GL_STATIC_DRAW );
 
-	glEnableVertexAttribArray( 0 );
-	glVertexAttribPointer( 0, 3, GL_FLOAT, GL_FALSE, 0, 0 );
+	glEnableVertexAttribArray( POSITION_BUF );
+	glVertexAttribPointer( POSITION_BUF, 3, GL_FLOAT, GL_FALSE, 0, 0 );
 
-	glBindBuffer( GL_TEXTURE_2D, vbo[TEXCOORD_BUF] );
-	glBufferData( GL_TEXTURE_2D, texCoords.size() * sizeof( texCoords.front() ), &texCoords.front(), GL_STATIC_DRAW );
+	glBindBuffer( GL_ARRAY_BUFFER, vbo[TEXCOORD_BUF] );
+	glBufferData( GL_ARRAY_BUFFER, texCoords.size() * sizeof( texCoords.front() ), &texCoords.front(), GL_STATIC_DRAW );
 
-	glEnableVertexAttribArray( 1 );
-	glVertexAttribPointer( 1, 2, GL_FLOAT, GL_FALSE, 0, 0 );
+	glEnableVertexAttribArray( TEXCOORD_BUF );
+	glVertexAttribPointer( TEXCOORD_BUF, 2, GL_FLOAT, GL_FALSE, 0, 0 );
 
 	glBindVertexArray( 0 ); //-----------------------------------------------------
 }
@@ -55,26 +55,26 @@ Texture2DVAO::Texture2DVAO ( Texture2DVertex *vertices, u_int numVertices ) {
 	glGenVertexArrays( 1, &vao );
 	glBindVertexArray( vao ); //---------------------------------------------------
 
-	glGenBuffers( NUM_BUF, vbo );
+	glGenBuffers( NUM_BUF-1, vbo );
 
 	/* Specify buffer data */
-	glBindBuffer( GL_TEXTURE_2D, vbo[POSITION_BUF] );
-	glBufferData( GL_TEXTURE_2D, positions.size() * sizeof( positions.front() ), &positions.front(), GL_STATIC_DRAW );
+	glBindBuffer( GL_ARRAY_BUFFER, vbo[POSITION_BUF] );
+	glBufferData( GL_ARRAY_BUFFER, positions.size() * sizeof( positions.front() ), &positions.front(), GL_STATIC_DRAW );
 
-	glEnableVertexAttribArray( 0 );
-	glVertexAttribPointer( 0, 3, GL_FLOAT, GL_FALSE, 0, 0 );
+	glEnableVertexAttribArray( POSITION_BUF );
+	glVertexAttribPointer( POSITION_BUF, 3, GL_FLOAT, GL_FALSE, 0, 0 );
 
-	glBindBuffer( GL_TEXTURE_2D, vbo[TEXCOORD_BUF] );
-	glBufferData( GL_TEXTURE_2D, texCoords.size() * sizeof( texCoords.front() ), &texCoords.front(), GL_STATIC_DRAW );
+	glBindBuffer( GL_ARRAY_BUFFER, vbo[TEXCOORD_BUF] );
+	glBufferData( GL_ARRAY_BUFFER, texCoords.size() * sizeof( texCoords.front() ), &texCoords.front(), GL_STATIC_DRAW );
 
-	glEnableVertexAttribArray( 1 );
-	glVertexAttribPointer( 1, 2, GL_FLOAT, GL_FALSE, 0, 0 );
+	glEnableVertexAttribArray( TEXCOORD_BUF );
+	glVertexAttribPointer( TEXCOORD_BUF, 2, GL_FLOAT, GL_FALSE, 0, 0 );
 
 	glBindVertexArray( 0 ); //-----------------------------------------------------
 }
 
 Texture2DVAO::Texture2DVAO ( const std::vector<Texture2DVertex>& vertices, const std::vector<u_int>& indices ) {
-	drawCount = vertices.size();
+	drawCount = indices.size();
 	this->vertices = vertices;
 	this->indices = indices;
 
@@ -94,25 +94,36 @@ Texture2DVAO::Texture2DVAO ( const std::vector<Texture2DVertex>& vertices, const
 	glGenBuffers( NUM_BUF, vbo );
 
 	/* Specify buffer data */
-	glBindBuffer( GL_TEXTURE_2D, vbo[POSITION_BUF] );
-	glBufferData( GL_TEXTURE_2D, positions.size() * sizeof( positions.front() ), &positions.front(), GL_STATIC_DRAW );
+	glBindBuffer( GL_ARRAY_BUFFER, vbo[POSITION_BUF] );
+	glBufferData( GL_ARRAY_BUFFER, positions.size() * sizeof( positions.front() ), &positions.front(), GL_STATIC_DRAW );
 
-	glEnableVertexAttribArray( 0 );
-	glVertexAttribPointer( 0, 3, GL_FLOAT, GL_FALSE, 0, 0 );
+	glEnableVertexAttribArray( POSITION_BUF );
+	glVertexAttribPointer( POSITION_BUF, 3, GL_FLOAT, GL_FALSE, 0, 0 );
 
-	glBindBuffer( GL_TEXTURE_2D, vbo[TEXCOORD_BUF] );
-	glBufferData( GL_TEXTURE_2D, texCoords.size() * sizeof( texCoords.front() ), &texCoords.front(), GL_STATIC_DRAW );
+	glBindBuffer( GL_ARRAY_BUFFER, vbo[TEXCOORD_BUF] );
+	glBufferData( GL_ARRAY_BUFFER, texCoords.size() * sizeof( texCoords.front() ), &texCoords.front(), GL_STATIC_DRAW );
 
-	glEnableVertexAttribArray( 1 );
-	glVertexAttribPointer( 1, 2, GL_FLOAT, GL_FALSE, 0, 0 );
+	glEnableVertexAttribArray( TEXCOORD_BUF );
+	glVertexAttribPointer( TEXCOORD_BUF, 2, GL_FLOAT, GL_FALSE, 0, 0 );
+
+	glBindBuffer( GL_ELEMENT_ARRAY_BUFFER, vbo[INDEX_BUF] );
+	glBufferData( GL_ELEMENT_ARRAY_BUFFER, indices.size() * sizeof( indices.front() ), &indices.front(), GL_STATIC_DRAW );
 
 	glBindVertexArray( 0 ); //-----------------------------------------------------
 }
 
-void Texture2DVAO::Draw () {
-	glBindVertexArray( vao );
-	glDrawArrays( GL_TRIANGLES, 0, drawCount );
-	glBindVertexArray( 0 );
+void Texture2DVAO::Draw () const {
+	if ( indices.size() > 0 ) {
+		glDrawElements( GL_TRIANGLES, drawCount, GL_UNSIGNED_INT, 0 );
+	} else {
+		glDrawArrays( GL_TRIANGLES, 0, drawCount );
+	}
+}
+
+void Texture2DVAO::Render () const {
+	Bind();
+	Draw();
+	Unbind();
 }
 
 Texture2DVAO::~Texture2DVAO () {

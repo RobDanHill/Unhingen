@@ -6,7 +6,8 @@
 class BasicVAO : public VAO {
 	public:
 		BasicVAO ( Vertex *vertices, u_int numVertices );
-		void Draw () override;
+		void Draw () const override;
+		void Render () const override;
 		virtual ~BasicVAO ();
 	private:
 		enum { POSITION_BUF, NUM_BUF };

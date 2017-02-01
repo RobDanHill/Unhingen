@@ -8,7 +8,10 @@
 
 class VAO {
 	public:
-		virtual void Draw () = 0;
+		inline void Bind () const { glBindVertexArray( vao ); }
+		inline void Unbind () const { glBindVertexArray( 0 ); }
+		virtual void Draw () const = 0;
+		virtual void Render () const = 0;
 	protected:
 		GLuint				vao;
 		GLuint				*vbo;

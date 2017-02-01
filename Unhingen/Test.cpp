@@ -32,27 +32,31 @@ int main ( int argc, char *argv[] ) {
 		Vertex( glm::vec3( 0.5f, -0.5f, 0.0f ) )
 	};
 
-	/*std::vector<Texture2DVertex> v = utils::ToExplicitVector( vertices, sizeof( vertices ) / sizeof( vertices[0] ) );
-	Mesh mesh( v );*/
-	//std::string fileContents = utils::LoadFile( "./Res/Hello.txt" );
-
-	Mesh mesh( vertices, sizeof( vertices ) / sizeof( vertices[0] ) );
+	u_int indices[] = { 0, 1, 2 };
 
 	//std::vector<Texture2DVertex> v = utils::ToExplicitVector( vertices, sizeof( vertices ) / sizeof( vertices[0] ) );
-	BasicVAO vao( verts, sizeof( verts ) / sizeof( verts[0] ) );
+	//Mesh mesh( verts, sizeof( verts) / sizeof( verts[0] ) );
+	//std::string fileContents = utils::LoadFile( "./Res/Hello.txt" );
+
+	//Mesh mesh( vertices, sizeof( vertices ) / sizeof( vertices[0] ) );
+
+	std::vector<Texture2DVertex> v = utils::ToExplicitVector( vertices, sizeof( vertices ) / sizeof( vertices[0] ) );
+	std::vector<u_int> i = utils::ToExplicitVector( indices, 3 );
+	Texture2DVAO vao( v, i );
 
 	Texture2D texture( "./Res/Images/DukeNukem3D.png" );
 
 	while ( win.IsRunning() ) {
 		win.Clear( 0.0f, 0.15f, 0.3f, 1.0f );	// Clear the window with light-blue
 
-		colorShader.Bind();
-		//texture.Bind();
+		//colorShader.Bind();
+		texShader.Bind();
+		texture.Bind();
+		//colorShader.SetGLUniform3f( "color", 1.0f, 0.0f, 0.0f );
 		//mesh.Draw();
-		colorShader.SetGLUniform3f( "color", 1.0f, 0.0f, 0.0f );
-		vao.Draw();
-		//texture.Unbind();
-		colorShader.Unbind();
+		vao.Render();
+		texture.Unbind();
+		texShader.Unbind();
 
 		win.Update();
 		for ( SDL_Event e; SDL_PollEvent( &e ); ) {

@@ -9,10 +9,11 @@ class Texture2DVAO : public VAO {
 		Texture2DVAO ( const std::vector<Texture2DVertex>& vertices );
 		Texture2DVAO ( Texture2DVertex *vertices, u_int numVertices );
 		Texture2DVAO ( const std::vector<Texture2DVertex>& vertices, const std::vector<u_int>& indices );
-		void Draw();
+		void Draw () const override;
+		void Render () const override;
 		virtual ~Texture2DVAO ();
 	private:
-		enum { POSITION_BUF, TEXCOORD_BUF, NUM_BUF };
+		enum { POSITION_BUF, TEXCOORD_BUF, INDEX_BUF, NUM_BUF };
 		//GLuint	vao;
 		//GLuint	vbo[NUM_BUF];
 		std::vector<Texture2DVertex> vertices;
