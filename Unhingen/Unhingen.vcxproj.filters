@@ -24,10 +24,16 @@
     <ClCompile Include="Common\Graphics\Mesh.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Common\Graphics\Shader.cpp">
+    <ClCompile Include="Common\Graphics\VAO\Texture2DVAO.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Common\Graphics\Texture2D.cpp">
+    <ClCompile Include="Common\Graphics\Texture\Texture2D.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\Graphics\Shader\Shader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\Graphics\VAO\BasicVAO.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -53,13 +59,25 @@
     <ClInclude Include="Common\Graphics\Mesh.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Common\Graphics\Shader.h">
+    <ClInclude Include="Common\Graphics\VAO\Texture2DVAO.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Common\Graphics\Texture2D.h">
+    <ClInclude Include="Common\Graphics\VAO\VAO.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Common\Graphics\Vertex.h">
+    <ClInclude Include="Common\Graphics\Texture\Texture2D.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Graphics\Vertex\Vertex.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Graphics\Vertex\Texture2DVertex.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Graphics\Shader\Shader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Graphics\VAO\BasicVAO.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

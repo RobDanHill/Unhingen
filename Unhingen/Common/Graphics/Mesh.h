@@ -3,12 +3,12 @@
 #include "..\Common\Types.h"
 #include <GL\glew.h>
 #include <vector>
-#include "Vertex.h"
+#include "Vertex\Texture2DVertex.h"
 
 class Mesh {
 	public:
-		Mesh ( const std::vector<Vertex>& vertices );
-		Mesh ( Vertex *vertices, u_int numVertices );
+		Mesh ( const std::vector<Texture2DVertex>& vertices );
+		Mesh ( Texture2DVertex *vertices, u_int numVertices );
 		void Draw ();
 		virtual ~Mesh ();
 	private:

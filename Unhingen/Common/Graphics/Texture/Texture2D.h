@@ -7,7 +7,8 @@
 class Texture2D {
 	public:
 		Texture2D ( const std::string& fileName );
-		void Bind ( u_int unit );
+		void Bind ();
+		void Unbind ();
 		inline u_int GetWidth () { return width; }
 		inline u_int GetHeight () { return height; }
 		virtual ~Texture2D ();

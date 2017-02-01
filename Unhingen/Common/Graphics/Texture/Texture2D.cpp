@@ -26,10 +26,15 @@ Texture2D::Texture2D ( const std::string& fileName ) {
 	SDL_FreeSurface( image );
 }
 
-void Texture2D::Bind ( u_int unit ) {
-	assert( unit >= 0 && unit <= 31 );
-	glActiveTexture( GL_TEXTURE0 + unit );
+void Texture2D::Bind () {
+	/*assert( unit >= 0 && unit <= 31 );
+	glActiveTexture( GL_TEXTURE0 + unit );*/
+	glActiveTexture( GL_TEXTURE0 );
 	glBindTexture( GL_TEXTURE_2D, textureHandle );
+}
+
+void Texture2D::Unbind () {
+	glBindTexture( GL_TEXTURE_2D, 0 );
 }
 
 Texture2D::~Texture2D () {
