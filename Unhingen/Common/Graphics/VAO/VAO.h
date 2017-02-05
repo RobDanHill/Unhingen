@@ -15,6 +15,6 @@ class VAO {
 	protected:
 		GLuint				vao;
 		GLuint				*vbo;
-		std::vector<u_int>	indices;
 		u_int				drawCount;
+		std::vector<u_int>	indices;
 };

@@ -21,44 +21,39 @@ int main ( int argc, char *argv[] ) {
 	Shader colorShader( "./Res/Shaders/Test" );
 
 	Texture2DVertex vertices[] = {
-		Texture2DVertex( glm::vec3( -0.5f, -0.5f, 0.0f ), glm::vec2( 0.0f, 1.0f ) ),
+		Texture2DVertex( glm::vec3( -0.5f, -0.5f, 0.0f ), glm::vec2( 0.15f, 1.0f ) ),
 		Texture2DVertex( glm::vec3( 0.0f, 0.5f, 0.0f ), glm::vec2( 0.5f, 0.0f ) ),
-		Texture2DVertex( glm::vec3( 0.5f, -0.5f, 0.0f ), glm::vec2( 1.0f, 1.0f ) )
+		Texture2DVertex( glm::vec3( 0.5f, -0.5f, 0.0f ), glm::vec2( 0.85f, 1.0f ) )
 	};
 
-	Vertex verts[] = {
+	/*Vertex verts[] = {
 		Vertex( glm::vec3( -0.5f, -0.5f, 0.0f ) ),
 		Vertex( glm::vec3( 0.0f, 0.5f, 0.0f ) ),
 		Vertex( glm::vec3( 0.5f, -0.5f, 0.0f ) )
 	};
 
+	BasicVAO colorvao( verts, sizeof( verts ) / sizeof( verts[0] ) );*/
+
 	u_int indices[] = { 0, 1, 2 };
 
-	//std::vector<Texture2DVertex> v = utils::ToExplicitVector( vertices, sizeof( vertices ) / sizeof( vertices[0] ) );
-	//Mesh mesh( verts, sizeof( verts) / sizeof( verts[0] ) );
-	//std::string fileContents = utils::LoadFile( "./Res/Hello.txt" );
-
-	//Mesh mesh( vertices, sizeof( vertices ) / sizeof( vertices[0] ) );
-
 	std::vector<Texture2DVertex> v = utils::ToExplicitVector( vertices, sizeof( vertices ) / sizeof( vertices[0] ) );
-	std::vector<u_int> i = utils::ToExplicitVector( indices, 3 );
+	std::vector<u_int> i = utils::ToExplicitVector( indices, sizeof( indices ) / sizeof( indices[0] ) );
 	Texture2DVAO vao( v, i );
 
 	Texture2D texture( "./Res/Images/DukeNukem3D.png" );
 
 	while ( win.IsRunning() ) {
-		win.Clear( 0.0f, 0.15f, 0.3f, 1.0f );	// Clear the window with light-blue
+		//win.Clear( 0.0f, 0.15f, 0.3f, 1.0f );	// Clear the window with light-blue
+		win.Clear( 0xff0000ff );
 
-		//colorShader.Bind();
 		texShader.Bind();
 		texture.Bind();
-		//colorShader.SetGLUniform3f( "color", 1.0f, 0.0f, 0.0f );
-		//mesh.Draw();
 		vao.Render();
 		texture.Unbind();
 		texShader.Unbind();
 
 		win.Update();
+
 		for ( SDL_Event e; SDL_PollEvent( &e ); ) {
 			switch ( e.type ) {
 				case SDL_QUIT: win.SetRunning( false ); break;

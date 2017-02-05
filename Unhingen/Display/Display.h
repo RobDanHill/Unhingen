@@ -8,6 +8,7 @@ class Display {
 	public:
 		Display ( const u_short width, const u_short height, const std::string& title );
 		void Clear ( float r, float g, float b, float a );
+		void Clear ( u_int color );
 		void Update ();
 		inline boolean IsRunning () { return running; }
 		inline void SetRunning ( boolean running ) { this->running = running; }

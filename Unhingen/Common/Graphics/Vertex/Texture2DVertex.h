@@ -8,7 +8,7 @@ class Texture2DVertex : public Vertex {
 			: Vertex( position ) {
 			this->texCoord = texCoord;
 		}
-		inline glm::vec2 GetTexCoord () { return texCoord; }
+		inline glm::vec2 GetTexCoord () const { return texCoord; }
 	private:
 		glm::vec2 texCoord;
 };

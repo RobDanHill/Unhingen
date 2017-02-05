@@ -44,16 +44,16 @@ Shader::Shader ( const std::string& vertFileName, const std::string& fragFileNam
 	/* Going to need to get the uniform location for transform at some point */
 }
 
-GLint Shader::GetGLUniform ( const std::string& varName ) {
+GLint Shader::GetUniform ( const std::string& varName ) {
 	return glGetUniformLocation( program, varName.c_str() );
 }
 
-void Shader::SetGLUniform3f ( const std::string& varName, const glm::vec3& data ) {
-	glUniform3f( GetGLUniform( varName ), data.x, data.y, data.z );
+void Shader::SetUniform3f ( const std::string& varName, const glm::vec3& data ) {
+	glUniform3f( GetUniform( varName ), data.x, data.y, data.z );
 }
 
-void Shader::SetGLUniform3f ( const std::string& varName, float x, float y, float z ) {
-	glUniform3f( GetGLUniform( varName ), x, y, z );
+void Shader::SetUniform3f ( const std::string& varName, float x, float y, float z ) {
+	glUniform3f( GetUniform( varName ), x, y, z );
 }
 
 void Shader::Bind () {

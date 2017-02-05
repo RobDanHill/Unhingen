@@ -14,7 +14,5 @@ class Texture2DVAO : public VAO {
 		virtual ~Texture2DVAO ();
 	private:
 		enum { POSITION_BUF, TEXCOORD_BUF, INDEX_BUF, NUM_BUF };
-		//GLuint	vao;
-		//GLuint	vbo[NUM_BUF];
 		std::vector<Texture2DVertex> vertices;
 };

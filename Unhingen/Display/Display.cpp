@@ -60,6 +60,16 @@ void Display::Clear ( float r, float g, float b, float a ) {
 	glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
 }
 
+void Display::Clear ( u_int color ) {
+	float r, g, b, a;
+	r = ( color >> 24 ) & 0xff;
+	g = ( color >> 16 ) & 0x00ff;
+	b = ( color >> 8 ) & 0x0000ff;
+	a = ( color >> 0 ) & 0x000000ff;
+	glClearColor( r / 0xff, g / 0xff, b / 0xff, a / 0xff );
+	glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
+}
+
 void Display::Update () {
 	SDL_GL_SwapWindow( window );
 }

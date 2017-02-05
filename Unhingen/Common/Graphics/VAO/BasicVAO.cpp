@@ -3,7 +3,6 @@
 #include <glm\glm.hpp>
 
 BasicVAO::BasicVAO ( Vertex *vertices, u_int numVertices ) {
-	vbo = new GLuint[NUM_BUF];
 	drawCount = numVertices;
 	
 	std::vector<glm::vec3> positions;
@@ -12,7 +11,7 @@ BasicVAO::BasicVAO ( Vertex *vertices, u_int numVertices ) {
 		printf( "Pos: %.1f %.1f %.1f\n", positions[i].x, positions[i].y, positions[i].z );
 	}
 
-	//vbo = new GLuint[NUM_BUF];
+	vbo = new GLuint[NUM_BUF];
 
 	glGenVertexArrays( 1, &vao );
 	glBindVertexArray( vao ); //---------------------------------------------------

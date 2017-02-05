@@ -1,11 +1,14 @@
 #include "Texture2DVAO.h"
 
+#include "..\Utils\IO.h"
 #include "..\System\Out.h"
 #include <stdio.h>
 
 Texture2DVAO::Texture2DVAO ( const std::vector<Texture2DVertex>& vertices ) {
 	drawCount = vertices.size();
-	this->vertices = vertices;
+	for ( size_t i = 0; i < vertices.size(); i++ ) {
+		this->vertices.push_back( vertices[i] );
+	}
 
 	std::vector<glm::vec3> positions;
 	std::vector<glm::vec2> texCoords;
@@ -40,7 +43,10 @@ Texture2DVAO::Texture2DVAO ( const std::vector<Texture2DVertex>& vertices ) {
 
 Texture2DVAO::Texture2DVAO ( Texture2DVertex *vertices, u_int numVertices ) {
 	drawCount = numVertices;
-	//this->vertices = vertices;
+	std::vector<Texture2DVertex> temp = utils::ToExplicitVector( vertices, numVertices );
+	for ( size_t i = 0; i < numVertices; i++ ) {
+		this->vertices.push_back( vertices[i] );
+	}
 
 	std::vector<glm::vec3> positions;
 	std::vector<glm::vec2> texCoords;
@@ -75,8 +81,14 @@ Texture2DVAO::Texture2DVAO ( Texture2DVertex *vertices, u_int numVertices ) {
 
 Texture2DVAO::Texture2DVAO ( const std::vector<Texture2DVertex>& vertices, const std::vector<u_int>& indices ) {
 	drawCount = indices.size();
-	this->vertices = vertices;
-	this->indices = indices;
+	/*this->vertices = vertices;
+	this->indices = indices;*/
+	for ( size_t i = 0; i < vertices.size(); i++ ) {
+		this->vertices.push_back( vertices[i] );
+	}
+	for ( size_t i = 0; i < indices.size(); i++ ) {
+		this->indices.push_back( indices[i] );
+	}
 
 	std::vector<glm::vec3> positions;
 	std::vector<glm::vec2> texCoords;

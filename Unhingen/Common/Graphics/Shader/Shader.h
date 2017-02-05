@@ -10,9 +10,9 @@ class Shader {
 		Shader ( const std::string& vertFileName, const std::string& fragFileName );
 		void Bind ();
 		void Unbind ();
-		GLint GetGLUniform ( const std::string& varName );
-		void SetGLUniform3f ( const std::string& varName, const glm::vec3& data );
-		void SetGLUniform3f ( const std::string& varName, float x, float y, float z );
+		GLint GetUniform ( const std::string& varName );
+		void SetUniform3f ( const std::string& varName, const glm::vec3& data );
+		void SetUniform3f ( const std::string& varName, float x, float y, float z );
 		virtual ~Shader ();
 	private:
 		GLuint		program;
