@@ -35,7 +35,7 @@ Shader::Shader ( const std::string& vertFileName, const std::string& fragFileNam
 	glAttachShader( program, vertexShader );
 	glAttachShader( program, fragmentShader );
 	glBindAttribLocation( program, 0, "position" );
-	//glBindAttribLocation( program, 1, "texCoord" );
+	glBindAttribLocation( program, 1, "texCoord" );
 	/* Going to need to bind the attrib locations of the texCoords and normals too */
 	glLinkProgram( program );
 	utils::ShaderError( program, GL_LINK_STATUS, true, "Program failed linking!" );
@@ -54,6 +54,14 @@ void Shader::SetUniform3f ( const std::string& varName, const glm::vec3& data ) 
 
 void Shader::SetUniform3f ( const std::string& varName, float x, float y, float z ) {
 	glUniform3f( GetUniform( varName ), x, y, z );
+}
+
+void Shader::SetUniformMat4f ( const std::string& varName, const glm::mat4& data ) {
+	glUniformMatrix4fv( GetUniform( varName ), 1, GL_FALSE, &data[0][0] );
+}
+
+void Shader::Update ( const glm::mat4& transform ) {
+	SetUniformMat4f( "transform", transform );
 }
 
 void Shader::Bind () {

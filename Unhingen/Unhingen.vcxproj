@@ -29,6 +29,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Common\Graphics\VAO\BasicVAO.h" />
+    <ClInclude Include="Common\Graphics\VAO\ModelTransform.h" />
     <ClInclude Include="Common\Graphics\VAO\Texture2DVAO.h" />
     <ClInclude Include="Common\Graphics\Vertex\Texture2DVertex.h" />
     <ClInclude Include="Common\Graphics\Mesh.h" />

@@ -42,12 +42,19 @@ int main ( int argc, char *argv[] ) {
 
 	Texture2D texture( "./Res/Images/DukeNukem3D.png" );
 
+	float counter = 0.0f;
+
 	while ( win.IsRunning() ) {
 		//win.Clear( 0.0f, 0.15f, 0.3f, 1.0f );	// Clear the window with light-blue
 		win.Clear( 0xff0000ff );
 
 		texShader.Bind();
 		texture.Bind();
+
+		/* Modify model transform values here */
+		vao.GetTransform().SetPosition( glm::vec3( sinf( counter ), 0.0f, cosf( counter ) ) );
+		texShader.Update( vao.GetTransform().GetTransformedModel() );
+
 		vao.Render();
 		texture.Unbind();
 		texShader.Unbind();
@@ -64,6 +71,8 @@ int main ( int argc, char *argv[] ) {
 					break;
 			}
 		}
+
+		counter += 0.001f;
 	}
 
 	return 0;

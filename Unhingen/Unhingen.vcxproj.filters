@@ -80,6 +80,9 @@
     <ClInclude Include="Common\Graphics\VAO\BasicVAO.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Common\Graphics\VAO\ModelTransform.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Res\Shaders\Texture.vs" />
