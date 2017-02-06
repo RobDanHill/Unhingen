@@ -10,6 +10,8 @@
 #include "Common\Graphics\Vertex\Texture2DVertex.h"
 #include "Common\Graphics\Shader\Shader.h"
 #include "Common\Graphics\Texture\Texture2D.h"
+#include "Common\Graphics\Camera\OrthographicCamera.h"
+#include "Common\Graphics\Camera\PerspectiveCamera.h"
 #include "Utils\IO.h"
 
 #define WINDOW_WIDTH 800
@@ -26,14 +28,6 @@ int main ( int argc, char *argv[] ) {
 		Texture2DVertex( glm::vec3( 0.5f, -0.5f, 0.0f ), glm::vec2( 0.85f, 1.0f ) )
 	};
 
-	/*Vertex verts[] = {
-		Vertex( glm::vec3( -0.5f, -0.5f, 0.0f ) ),
-		Vertex( glm::vec3( 0.0f, 0.5f, 0.0f ) ),
-		Vertex( glm::vec3( 0.5f, -0.5f, 0.0f ) )
-	};
-
-	BasicVAO colorvao( verts, sizeof( verts ) / sizeof( verts[0] ) );*/
-
 	u_int indices[] = { 0, 1, 2 };
 
 	std::vector<Texture2DVertex> v = utils::ToExplicitVector( vertices, sizeof( vertices ) / sizeof( vertices[0] ) );
@@ -42,18 +36,22 @@ int main ( int argc, char *argv[] ) {
 
 	Texture2D texture( "./Res/Images/DukeNukem3D.png" );
 
+	OrthographicCamera orthocam( glm::vec3( 0.0f, 0.0f, 3.0f ), -1.0f, 1.0f, -1.0f, 1.0f, 0.0f, 1000.0f );
+	PerspectiveCamera perspcam( glm::vec3( 0.0f, 0.0f, 1.0f ), 70.0f, ( float ) WINDOW_WIDTH / ( float ) WINDOW_HEIGHT, 0.01f, 1000.0f );
+
 	float counter = 0.0f;
 
 	while ( win.IsRunning() ) {
 		//win.Clear( 0.0f, 0.15f, 0.3f, 1.0f );	// Clear the window with light-blue
-		win.Clear( 0xff0000ff );
+		win.Clear( 0 );
 
 		texShader.Bind();
 		texture.Bind();
 
 		/* Modify model transform values here */
-		vao.GetTransform().SetPosition( glm::vec3( sinf( counter ), 0.0f, cosf( counter ) ) );
-		texShader.Update( vao.GetTransform().GetTransformedModel() );
+		vao.GetTransform().SetPosition( glm::vec3( sinf( counter ), vao.GetTransform().GetPosition().y, vao.GetTransform().GetPosition().z ) );
+		vao.GetTransform().SetRotation( glm::vec3( counter, counter, vao.GetTransform().GetRotation().z ) );
+		texShader.Update( vao.GetTransform().GetTransformedModel(), orthocam.GetProjection() );
 
 		vao.Render();
 		texture.Unbind();

@@ -15,6 +15,7 @@ class Shader {
 		void SetUniform3f ( const std::string& varName, const glm::vec3& data );
 		void SetUniform3f ( const std::string& varName, float x, float y, float z );
 		void SetUniformMat4f ( const std::string& varName, const glm::mat4& data );
+		void Update ( const glm::mat4& transform, const glm::mat4& projection );
 		void Update ( const glm::mat4& transform );
 		virtual ~Shader ();
 	private:

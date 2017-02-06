@@ -28,6 +28,9 @@
     <ClCompile Include="Test.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Common\Graphics\Camera\Camera.h" />
+    <ClInclude Include="Common\Graphics\Camera\OrthographicCamera.h" />
+    <ClInclude Include="Common\Graphics\Camera\PerspectiveCamera.h" />
     <ClInclude Include="Common\Graphics\VAO\BasicVAO.h" />
     <ClInclude Include="Common\Graphics\VAO\ModelTransform.h" />
     <ClInclude Include="Common\Graphics\VAO\Texture2DVAO.h" />

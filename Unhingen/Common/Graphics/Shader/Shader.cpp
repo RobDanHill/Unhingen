@@ -60,6 +60,10 @@ void Shader::SetUniformMat4f ( const std::string& varName, const glm::mat4& data
 	glUniformMatrix4fv( GetUniform( varName ), 1, GL_FALSE, &data[0][0] );
 }
 
+void Shader::Update ( const glm::mat4& transform, const glm::mat4& projection ) {
+	SetUniformMat4f( "transform", projection * transform );
+}
+
 void Shader::Update ( const glm::mat4& transform ) {
 	SetUniformMat4f( "transform", transform );
 }

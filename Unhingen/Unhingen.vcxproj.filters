@@ -83,6 +83,15 @@
     <ClInclude Include="Common\Graphics\VAO\ModelTransform.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Common\Graphics\Camera\Camera.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Graphics\Camera\OrthographicCamera.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Graphics\Camera\PerspectiveCamera.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Res\Shaders\Texture.vs" />
