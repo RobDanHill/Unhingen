@@ -19,6 +19,7 @@ Display::Display ( const u_short width, const u_short height, const std::string&
 		err::SDL_ErrMsg( "SDL could not create an OpenGL context for the associated window!" );
 	}
 	InitGLEW();
+	glViewport( 0, 0, width, height );
 	glEnable( GL_DEPTH_TEST );
 	SetClearColor( 0x00000000 ); // Default clear color is black
 	/*glEnable( GL_CULL_FACE );
@@ -58,7 +59,6 @@ void Display::InitGLEW () {
  */
 void Display::SetClearColor ( float r, float g, float b, float a ) {
 	glClearColor( r, g, b, a );
-	//glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
 }
 
 void Display::SetClearColor ( u_int color ) {
@@ -68,7 +68,6 @@ void Display::SetClearColor ( u_int color ) {
 	b = ( float ) ( ( color >> 8 ) & 0x0000ff );
 	a = ( float ) ( ( color >> 0 ) & 0x000000ff );
 	glClearColor( r / 0xff, g / 0xff, b / 0xff, a / 0xff );
-	//glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
 }
 
 void Display::Clear() {

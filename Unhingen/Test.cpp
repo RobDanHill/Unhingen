@@ -14,8 +14,8 @@
 #include "Common\Graphics\Camera\PerspectiveCamera.h"
 #include "Utils\IO.h"
 
-#define WINDOW_WIDTH 800
-#define WINDOW_HEIGHT 600
+#define WINDOW_WIDTH 1280//800
+#define WINDOW_HEIGHT 720//600
 
 int main ( int argc, char *argv[] ) {
 	Display win( WINDOW_WIDTH, WINDOW_HEIGHT, "Test Window" );
@@ -36,7 +36,7 @@ int main ( int argc, char *argv[] ) {
 
 	Texture2D texture( "./Res/Images/DukeNukem3D.png" );
 
-	OrthographicCamera orthocam( glm::vec3( 0.0f, 0.0f, 3.0f ), -1.0f, 1.0f, -1.0f, 1.0f, 0.0f, 1000.0f );
+	OrthographicCamera orthocam( glm::vec3( 0.0f, 0.0f, 0.0f ), 0.0f, ( float ) WINDOW_WIDTH, ( float ) WINDOW_HEIGHT, 0.0f, -1.0f, 1.0f );
 	PerspectiveCamera perspcam( glm::vec3( 0.0f, 0.0f, 1.0f ), 70.0f, ( float ) WINDOW_WIDTH / ( float ) WINDOW_HEIGHT, 0.01f, 1000.0f );
 
 	float counter = 0.0f;
@@ -51,8 +51,9 @@ int main ( int argc, char *argv[] ) {
 		texture.Bind();
 
 		/* Modify model transform values here */
-		vao.GetTransform().SetPosition( glm::vec3( sinf( counter ), vao.GetTransform().GetPosition().y, vao.GetTransform().GetPosition().z ) );
+		vao.GetTransform().SetPosition( glm::vec3( WINDOW_WIDTH/2 + sinf( counter ), WINDOW_HEIGHT/2 + vao.GetTransform().GetPosition().y, vao.GetTransform().GetPosition().z ) );
 		vao.GetTransform().SetRotation( glm::vec3( counter, counter, vao.GetTransform().GetRotation().z ) );
+		//vao.GetTransform().SetScale( glm::vec3( 100.0f, 100.0f, vao.GetTransform().GetScale().z ) );
 		texShader.Update( vao.GetTransform().GetTransformedModel(), orthocam.GetProjection() );
 
 		vao.Render();
@@ -72,7 +73,7 @@ int main ( int argc, char *argv[] ) {
 			}
 		}
 
-		counter += 0.001f;
+		counter += 0.01f;
 	}
 
 	return 0;
