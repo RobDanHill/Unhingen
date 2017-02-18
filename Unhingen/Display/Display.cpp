@@ -20,6 +20,7 @@ Display::Display ( const u_short width, const u_short height, const std::string&
 	}
 	InitGLEW();
 	glEnable( GL_DEPTH_TEST );
+	SetClearColor( 0x00000000 ); // Default clear color is black
 	/*glEnable( GL_CULL_FACE );
 	glCullFace( GL_BACK );*/
 }
@@ -55,18 +56,22 @@ void Display::InitGLEW () {
 /*
  * Clears the screen with the specified color
  */
-void Display::Clear ( float r, float g, float b, float a ) {
+void Display::SetClearColor ( float r, float g, float b, float a ) {
 	glClearColor( r, g, b, a );
-	glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
+	//glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
 }
 
-void Display::Clear ( u_int color ) {
+void Display::SetClearColor ( u_int color ) {
 	float r, g, b, a;
-	r = ( color >> 24 ) & 0xff;
-	g = ( color >> 16 ) & 0x00ff;
-	b = ( color >> 8 ) & 0x0000ff;
-	a = ( color >> 0 ) & 0x000000ff;
+	r = ( float ) ( ( color >> 24 ) & 0xff );
+	g = ( float ) ( ( color >> 16 ) & 0x00ff );
+	b = ( float ) ( ( color >> 8 ) & 0x0000ff );
+	a = ( float ) ( ( color >> 0 ) & 0x000000ff );
 	glClearColor( r / 0xff, g / 0xff, b / 0xff, a / 0xff );
+	//glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
+}
+
+void Display::Clear() {
 	glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
 }
 

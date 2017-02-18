@@ -41,9 +41,11 @@ int main ( int argc, char *argv[] ) {
 
 	float counter = 0.0f;
 
+	//win.SetClearColor( 0xff000000 );
+
 	while ( win.IsRunning() ) {
 		//win.Clear( 0.0f, 0.15f, 0.3f, 1.0f );	// Clear the window with light-blue
-		win.Clear( 0 );
+		win.Clear();
 
 		texShader.Bind();
 		texture.Bind();
@@ -61,10 +63,10 @@ int main ( int argc, char *argv[] ) {
 
 		for ( SDL_Event e; SDL_PollEvent( &e ); ) {
 			switch ( e.type ) {
-				case SDL_QUIT: win.SetRunning( false ); break;
+				case SDL_QUIT: win.Close(); break;
 				case SDL_KEYUP:
 					switch ( e.key.keysym.sym ) {
-						case SDLK_ESCAPE: win.SetRunning( false );
+						case SDLK_ESCAPE: win.Close(); break;
 					}
 					break;
 			}
