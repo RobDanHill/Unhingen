@@ -55,6 +55,7 @@ int main ( int argc, char *argv[] ) {
 
 		/* Modify model transform values here */
 		vao.GetTransform().SetPosition( glm::vec3( x - 0.5f * width, y - 0.5f * height, vao.GetTransform().GetPosition().z ) );
+		//vao.GetTransform().SetPosition( glm::vec3( x, y, vao.GetTransform().GetPosition().z ) );
 		vao.GetTransform().SetRotation( glm::vec3( vao.GetTransform().GetRotation().x, vao.GetTransform().GetRotation().y, angle ) );
 		vao.GetTransform().SetScale( glm::vec3( width, height, vao.GetTransform().GetScale().z ) );
 		texShader.Update( vao.GetTransform().GetTransformedModel(), orthocam.GetProjection() );
@@ -67,8 +68,8 @@ int main ( int argc, char *argv[] ) {
 	while ( win.IsRunning() ) {
 		win.Clear();
 
-		DrawTriangle( win.GetWidth() / 2, win.GetHeight() / 2, 500, 400, counter );
-		DrawTriangle( win.GetWidth() / 2, win.GetHeight() / 2, 100, 100, 0.0f );
+		DrawTriangle( win.GetWidth() / 2 - cosf( counter ) * win.GetWidth() / 2, win.GetHeight() / 2 + sinf( counter ) * win.GetHeight() / 2, 500, 400, counter );
+		DrawTriangle( win.GetWidth() / 2 + sinf( counter ) * win.GetWidth() / 2, win.GetHeight() / 2, 100, 80, 0.0f );
 
 		win.Update();
 

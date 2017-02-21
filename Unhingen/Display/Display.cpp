@@ -21,10 +21,7 @@ tuDisplay::tuDisplay ( const u_short width, const u_short height, const std::str
 	}
 	InitGLEW();
 	glViewport( 0, 0, width, height );
-	glEnable( GL_DEPTH_TEST );
 	SetClearColor( 0x00000000 ); // Default clear color is black
-	/*glEnable( GL_CULL_FACE );
-	glCullFace( GL_BACK );*/
 }
 
 /*
@@ -72,7 +69,7 @@ void tuDisplay::SetClearColor ( u_int color ) {
 }
 
 void tuDisplay::Clear() {
-	glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
+	glClear( GL_COLOR_BUFFER_BIT );
 }
 
 void tuDisplay::Update () {
