@@ -17,6 +17,8 @@
 #define WINDOW_WIDTH 1280//800
 #define WINDOW_HEIGHT 720//600
 
+#define ASPECT ( float ) WINDOW_WIDTH / ( float ) WINDOW_HEIGHT
+
 int main ( int argc, char *argv[] ) {
 	Display win( WINDOW_WIDTH, WINDOW_HEIGHT, "Test Window" );
 	Shader texShader( "./Res/Shaders/Texture" );
@@ -28,37 +30,44 @@ int main ( int argc, char *argv[] ) {
 		Texture2DVertex( glm::vec3( 0.5f, -0.5f, 0.0f ), glm::vec2( 0.85f, 1.0f ) )
 	};
 
+	Texture2DVertex orthoVertices[] = {
+		Texture2DVertex( glm::vec3( 0.0f, 1.0f, 0.0f ), glm::vec2( 0.15f, 1.0f ) ),
+		Texture2DVertex( glm::vec3( 0.5f, 0.0f, 0.0f ), glm::vec2( 0.5f, 0.0f ) ),
+		Texture2DVertex( glm::vec3( 1.0f, 1.0f, 0.0f ), glm::vec2( 0.85f, 1.0f ) )
+	};
+
 	u_int indices[] = { 0, 1, 2 };
 
-	std::vector<Texture2DVertex> v = utils::ToExplicitVector( vertices, sizeof( vertices ) / sizeof( vertices[0] ) );
+	std::vector<Texture2DVertex> v = utils::ToExplicitVector( orthoVertices, sizeof( orthoVertices ) / sizeof( orthoVertices[0] ) );
 	std::vector<u_int> i = utils::ToExplicitVector( indices, sizeof( indices ) / sizeof( indices[0] ) );
 	Texture2DVAO vao( v, i );
 
 	Texture2D texture( "./Res/Images/DukeNukem3D.png" );
 
 	OrthographicCamera orthocam( glm::vec3( 0.0f, 0.0f, 0.0f ), 0.0f, ( float ) WINDOW_WIDTH, ( float ) WINDOW_HEIGHT, 0.0f, -1.0f, 1.0f );
-	PerspectiveCamera perspcam( glm::vec3( 0.0f, 0.0f, 1.0f ), 70.0f, ( float ) WINDOW_WIDTH / ( float ) WINDOW_HEIGHT, 0.01f, 1000.0f );
+	PerspectiveCamera perspcam( glm::vec3( 0.0f, 0.0f, 3.0f ), 70.0f, ASPECT, 0.01f, 1000.0f );
 
 	float counter = 0.0f;
 
-	//win.SetClearColor( 0xff000000 );
-
-	while ( win.IsRunning() ) {
-		//win.Clear( 0.0f, 0.15f, 0.3f, 1.0f );	// Clear the window with light-blue
-		win.Clear();
-
+	auto DrawTriangle = [&]( u_short x, u_short y, u_short width, u_short height, float angle ) -> void {
 		texShader.Bind();
 		texture.Bind();
 
 		/* Modify model transform values here */
-		vao.GetTransform().SetPosition( glm::vec3( WINDOW_WIDTH/2 + sinf( counter ), WINDOW_HEIGHT/2 + vao.GetTransform().GetPosition().y, vao.GetTransform().GetPosition().z ) );
-		vao.GetTransform().SetRotation( glm::vec3( counter, counter, vao.GetTransform().GetRotation().z ) );
-		//vao.GetTransform().SetScale( glm::vec3( 100.0f, 100.0f, vao.GetTransform().GetScale().z ) );
+		vao.GetTransform().SetPosition( glm::vec3( x - 0.5f * width, y - 0.5f * height, vao.GetTransform().GetPosition().z ) );
+		vao.GetTransform().SetRotation( glm::vec3( vao.GetTransform().GetRotation().x, vao.GetTransform().GetRotation().y, angle ) );
+		vao.GetTransform().SetScale( glm::vec3( width, height, vao.GetTransform().GetScale().z ) );
 		texShader.Update( vao.GetTransform().GetTransformedModel(), orthocam.GetProjection() );
 
 		vao.Render();
 		texture.Unbind();
 		texShader.Unbind();
+	};
+
+	while ( win.IsRunning() ) {
+		win.Clear();
+
+		DrawTriangle( win.GetWidth() / 2, win.GetHeight() / 2, 500, 400, counter );
 
 		win.Update();
 
@@ -73,7 +82,7 @@ int main ( int argc, char *argv[] ) {
 			}
 		}
 
-		counter += 0.01f;
+		counter += 0.001f;
 	}
 
 	return 0;

@@ -14,11 +14,15 @@ class Display {
 		inline boolean IsRunning () { return running; }
 		inline void SetRunning ( boolean running ) { this->running = running; }
 		inline void Close () { running = false; }
+		inline u_short GetWidth () { return width; }
+		inline u_short GetHeight () { return height; }
 		virtual ~Display ();
 	private:
 		boolean			running;
 		SDL_Window		*window;
 		SDL_GLContext	glContext;
+		u_short			width;
+		u_short			height;
 		void InitSDL ();
 		void InitGLEW ();
 };

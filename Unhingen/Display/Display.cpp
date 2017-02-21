@@ -5,6 +5,7 @@
 
 Display::Display ( const u_short width, const u_short height, const std::string& title ) {
 	running = true;
+	this->width = width; this->height = height;
 	InitSDL();
 	window = SDL_CreateWindow(
 		title.c_str(),
