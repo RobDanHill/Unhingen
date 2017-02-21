@@ -4,10 +4,10 @@
 #include <glm\glm.hpp>
 #include <glm\gtc\matrix_transform.hpp>
 
-class OrthographicCamera : public Camera {
+class tuOrthographicCamera : public tuCamera_a {
 	public:
-		OrthographicCamera ( const glm::vec3& position, float left, float right, float bottom, float top, float zNear, float zFar ) :
-			Camera( position, glm::vec3( 0.0f, 1.0f, 0.0f ), glm::vec3( 0.0f, 0.0f, -1.0f ) ) {
+		tuOrthographicCamera ( const glm::vec3& position, float left, float right, float bottom, float top, float zNear, float zFar ) :
+			tuCamera_a( position, glm::vec3( 0.0f, 1.0f, 0.0f ), glm::vec3( 0.0f, 0.0f, -1.0f ) ) {
 			orthographic = glm::ortho( left, right, bottom, top, zNear, zFar );
 		}
 		inline glm::mat4 GetProjection () const override {

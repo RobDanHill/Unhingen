@@ -4,14 +4,14 @@
 #include <GL\glew.h>
 #include <string>
 
-class Texture2D {
+class tuTex2D {
 	public:
-		Texture2D ( const std::string& fileName );
+		tuTex2D ( const std::string& fileName );
 		void Bind ();
 		void Unbind ();
 		inline u_int GetWidth () { return width; }
 		inline u_int GetHeight () { return height; }
-		virtual ~Texture2D ();
+		virtual ~tuTex2D ();
 	private:
 		GLuint	textureHandle;
 		u_int	width;

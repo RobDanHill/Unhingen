@@ -4,7 +4,7 @@
 #include "..\System\Out.h"
 #include <stdio.h>
 
-Texture2DVAO::Texture2DVAO ( const std::vector<Texture2DVertex>& vertices ) {
+tuTex2DVAO::tuTex2DVAO ( const std::vector<tuTex2DVertex>& vertices ) {
 	drawCount = vertices.size();
 	for ( size_t i = 0; i < vertices.size(); i++ ) {
 		this->vertices.push_back( vertices[i] );
@@ -41,9 +41,9 @@ Texture2DVAO::Texture2DVAO ( const std::vector<Texture2DVertex>& vertices ) {
 	glBindVertexArray( 0 ); //-----------------------------------------------------
 }
 
-Texture2DVAO::Texture2DVAO ( Texture2DVertex *vertices, u_int numVertices ) {
+tuTex2DVAO::tuTex2DVAO ( tuTex2DVertex *vertices, u_int numVertices ) {
 	drawCount = numVertices;
-	std::vector<Texture2DVertex> temp = utils::ToExplicitVector( vertices, numVertices );
+	std::vector<tuTex2DVertex> temp = utils::ToExplicitVector( vertices, numVertices );
 	for ( size_t i = 0; i < numVertices; i++ ) {
 		this->vertices.push_back( vertices[i] );
 	}
@@ -79,7 +79,7 @@ Texture2DVAO::Texture2DVAO ( Texture2DVertex *vertices, u_int numVertices ) {
 	glBindVertexArray( 0 ); //-----------------------------------------------------
 }
 
-Texture2DVAO::Texture2DVAO ( const std::vector<Texture2DVertex>& vertices, const std::vector<u_int>& indices ) {
+tuTex2DVAO::tuTex2DVAO ( const std::vector<tuTex2DVertex>& vertices, const std::vector<u_int>& indices ) {
 	drawCount = indices.size();
 	/*this->vertices = vertices;
 	this->indices = indices;*/
@@ -124,7 +124,7 @@ Texture2DVAO::Texture2DVAO ( const std::vector<Texture2DVertex>& vertices, const
 	glBindVertexArray( 0 ); //-----------------------------------------------------
 }
 
-void Texture2DVAO::Draw () const {
+void tuTex2DVAO::Draw () const {
 	if ( indices.size() > 0 ) {
 		glDrawElements( GL_TRIANGLES, drawCount, GL_UNSIGNED_INT, 0 );
 	} else {
@@ -132,13 +132,13 @@ void Texture2DVAO::Draw () const {
 	}
 }
 
-void Texture2DVAO::Render () const {
+void tuTex2DVAO::Render () const {
 	Bind();
 	Draw();
 	Unbind();
 }
 
-Texture2DVAO::~Texture2DVAO () {
+tuTex2DVAO::~tuTex2DVAO () {
 	delete[] vbo;
 	glDeleteVertexArrays( 1, &vao );
 }

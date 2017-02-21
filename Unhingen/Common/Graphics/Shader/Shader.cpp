@@ -4,7 +4,7 @@
 #include "..\Utils\ShaderUtils.h"
 #include "..\Utils\IO.h"
 
-Shader::Shader ( const std::string& fileName ) {
+tuShader::tuShader ( const std::string& fileName ) {
 	program = glCreateProgram();
 	if ( program == 0 ) {
 		err::GLEW_ErrMsg( "An error occurred while creating the program object!", glGetError() );
@@ -24,7 +24,7 @@ Shader::Shader ( const std::string& fileName ) {
 	/* Going to need to get the uniform location for transform at some point */
 }
 
-Shader::Shader ( const std::string& vertFileName, const std::string& fragFileName ) {
+tuShader::tuShader ( const std::string& vertFileName, const std::string& fragFileName ) {
 	program = glCreateProgram();
 	if ( program == 0 ) {
 		err::GLEW_ErrMsg( "An error occurred while creating the program object!", glGetError() );
@@ -44,38 +44,38 @@ Shader::Shader ( const std::string& vertFileName, const std::string& fragFileNam
 	/* Going to need to get the uniform location for transform at some point */
 }
 
-GLint Shader::GetUniform ( const std::string& varName ) {
+GLint tuShader::GetUniform ( const std::string& varName ) {
 	return glGetUniformLocation( program, varName.c_str() );
 }
 
-void Shader::SetUniform3f ( const std::string& varName, const glm::vec3& data ) {
+void tuShader::SetUniform3f ( const std::string& varName, const glm::vec3& data ) {
 	glUniform3f( GetUniform( varName ), data.x, data.y, data.z );
 }
 
-void Shader::SetUniform3f ( const std::string& varName, float x, float y, float z ) {
+void tuShader::SetUniform3f ( const std::string& varName, float x, float y, float z ) {
 	glUniform3f( GetUniform( varName ), x, y, z );
 }
 
-void Shader::SetUniformMat4f ( const std::string& varName, const glm::mat4& data ) {
+void tuShader::SetUniformMat4f ( const std::string& varName, const glm::mat4& data ) {
 	glUniformMatrix4fv( GetUniform( varName ), 1, GL_FALSE, &data[0][0] );
 }
 
-void Shader::Update ( const glm::mat4& transform, const glm::mat4& projection ) {
+void tuShader::Update ( const glm::mat4& transform, const glm::mat4& projection ) {
 	SetUniformMat4f( "transform", projection * transform );
 }
 
-void Shader::Update ( const glm::mat4& transform ) {
+void tuShader::Update ( const glm::mat4& transform ) {
 	SetUniformMat4f( "transform", transform );
 }
 
-void Shader::Bind () {
+void tuShader::Bind () {
 	glUseProgram( program );
 }
-void Shader::Unbind () {
+void tuShader::Unbind () {
 	glUseProgram( 0 );
 }
 
-Shader::~Shader () {
+tuShader::~tuShader () {
 	glDetachShader( program, vertexShader );
 	glDeleteShader( vertexShader );
 	glDetachShader( program, fragmentShader );

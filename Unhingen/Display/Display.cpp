@@ -3,7 +3,7 @@
 #include "..\System\Error.h"
 #include <GL\glew.h>
 
-Display::Display ( const u_short width, const u_short height, const std::string& title ) {
+tuDisplay::tuDisplay ( const u_short width, const u_short height, const std::string& title ) {
 	running = true;
 	this->width = width; this->height = height;
 	InitSDL();
@@ -30,7 +30,7 @@ Display::Display ( const u_short width, const u_short height, const std::string&
 /*
  * Initialize SDL, SDL_image, and all buffer sizes
  */
-void Display::InitSDL () {
+void tuDisplay::InitSDL () {
 	if ( SDL_Init( SDL_INIT_EVERYTHING ) < 0 ) {
 		err::SDL_ErrMsg( "SDL failed to initialize!" );
 		running = false;
@@ -47,7 +47,7 @@ void Display::InitSDL () {
 	SDL_GL_SetAttribute( SDL_GL_DOUBLEBUFFER, 1 );
 }
 
-void Display::InitGLEW () {
+void tuDisplay::InitGLEW () {
 	const GLenum result = glewInit();
 	if ( result != GLEW_OK ) {
 		err::GLEW_ErrMsg( "GLEW failed to initialize!", result );
@@ -58,11 +58,11 @@ void Display::InitGLEW () {
 /*
  * Clears the screen with the specified color
  */
-void Display::SetClearColor ( float r, float g, float b, float a ) {
+void tuDisplay::SetClearColor ( float r, float g, float b, float a ) {
 	glClearColor( r, g, b, a );
 }
 
-void Display::SetClearColor ( u_int color ) {
+void tuDisplay::SetClearColor ( u_int color ) {
 	float r, g, b, a;
 	r = ( float ) ( ( color >> 24 ) & 0xff );
 	g = ( float ) ( ( color >> 16 ) & 0x00ff );
@@ -71,15 +71,15 @@ void Display::SetClearColor ( u_int color ) {
 	glClearColor( r / 0xff, g / 0xff, b / 0xff, a / 0xff );
 }
 
-void Display::Clear() {
+void tuDisplay::Clear() {
 	glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
 }
 
-void Display::Update () {
+void tuDisplay::Update () {
 	SDL_GL_SwapWindow( window );
 }
 
-Display::~Display () {
+tuDisplay::~tuDisplay () {
 	SDL_GL_DeleteContext( glContext );
 	SDL_DestroyWindow( window );
 	IMG_Quit();

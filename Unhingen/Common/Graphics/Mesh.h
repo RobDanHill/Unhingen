@@ -7,8 +7,8 @@
 
 class Mesh {
 	public:
-		Mesh ( const std::vector<Texture2DVertex>& vertices );
-		Mesh ( Texture2DVertex *vertices, u_int numVertices );
+		Mesh ( const std::vector<tuTex2DVertex>& vertices );
+		Mesh ( tuTex2DVertex *vertices, u_int numVertices );
 		void Draw ();
 		virtual ~Mesh ();
 	private:

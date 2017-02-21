@@ -3,15 +3,15 @@
 #include <glm\glm.hpp>
 #include <glm\gtx\transform.hpp>
 
-class ModelTransform {
+class tuModelTransform {
 	public:
-		ModelTransform () {
+		tuModelTransform () {
 			this->position = glm::vec3();
 			this->rotation = glm::vec3();
 			this->scale = glm::vec3( 1.0f, 1.0f, 1.0f );
 		}
 
-		ModelTransform ( const glm::vec3& position, const glm::vec3& rotation, const glm::vec3& scale ) {
+		tuModelTransform ( const glm::vec3& position, const glm::vec3& rotation, const glm::vec3& scale ) {
 			this->position = position;
 			this->rotation = rotation;
 			this->scale = scale;

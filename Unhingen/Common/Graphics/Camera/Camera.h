@@ -2,9 +2,9 @@
 
 #include <glm\glm.hpp>
 
-class Camera {
+class tuCamera_a {
 	public:
-		Camera ( const glm::vec3& position, const glm::vec3& up, const glm::vec3& forward ) {
+		tuCamera_a ( const glm::vec3& position, const glm::vec3& up, const glm::vec3& forward ) {
 			this->position = position;
 			this->up = up;
 			this->forward = forward;

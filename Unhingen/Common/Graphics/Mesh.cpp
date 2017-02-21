@@ -1,7 +1,7 @@
 #include "Mesh.h"
 #include <vector>
 
-Mesh::Mesh ( Texture2DVertex *vertices, u_int numVertices ) {
+Mesh::Mesh ( tuTex2DVertex *vertices, u_int numVertices ) {
 	drawCount = numVertices;
 	std::vector<glm::vec3> positions;
 	std::vector<glm::vec2> texCoords;

@@ -3,13 +3,13 @@
 #include "VAO.h"
 #include "..\Common\Graphics\Vertex\Vertex.h"
 
-class BasicVAO : public VAO {
+class tuBasicVAO : public tuVAO_a {
 	public:
-		BasicVAO ( Vertex *vertices, u_int numVertices );
+		tuBasicVAO ( tuVertex *vertices, u_int numVertices );
 		void Draw () const override;
 		void Render () const override;
-		virtual ~BasicVAO ();
+		virtual ~tuBasicVAO ();
 	private:
 		enum { POSITION_BUF, NUM_BUF };
-		std::vector<Vertex> vertices;
+		std::vector<tuVertex> vertices;
 };
