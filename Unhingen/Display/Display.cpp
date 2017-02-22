@@ -21,6 +21,8 @@ tuDisplay::tuDisplay ( const u_short width, const u_short height, const std::str
 	}
 	InitGLEW();
 	glViewport( 0, 0, width, height );
+	glEnable( GL_TEXTURE_2D );
+	glEnable( GL_ALPHA_TEST );
 	SetClearColor( 0x00000000 ); // Default clear color is black
 }
 
