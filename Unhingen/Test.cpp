@@ -62,7 +62,8 @@ int main ( int argc, char *argv[] ) {
 	std::vector<u_int> i = utils::ToExplicitVector( quadIndices, sizeof( quadIndices ) / sizeof( quadIndices[0] ) );
 	tuTex2DVAO vao( v, i );
 
-	tuTex2D texture( "./Res/Images/BasicTile500x500.png" );
+	tuTex2D texture( "./Res/Images/BasicBrickedTile.png" );
+	tuTex2D texture2( "./Res/Images/DukeNukem3D.png" );
 
 	tuOrthographicCamera orthocam( glm::vec3( 0.0f, 0.0f, 0.0f ), 0.0f, ( float ) WINDOW_WIDTH, ( float ) WINDOW_HEIGHT, 0.0f, -1.0f, 1.0f );
 	tuPerspectiveCamera perspcam( glm::vec3( 0.0f, 0.0f, 3.0f ), 70.0f, ASPECT, 0.01f, 1000.0f );
@@ -100,7 +101,7 @@ int main ( int argc, char *argv[] ) {
 
 	float counter = 0.0f;
 
-	auto DrawShape = [&]( u_short x, u_short y, u_short width, u_short height, float angle ) -> void {
+	auto DrawShape = [&]( tuTex2D& texture, u_short x, u_short y, u_short width, u_short height, float angle ) -> void {
 		texShader.Bind();
 		texture.Bind();
 
@@ -117,11 +118,15 @@ int main ( int argc, char *argv[] ) {
 	};
 
 	auto DrawMap = [&]( float counter ) -> void {
+		/* Background drawing routine - Draw one quad that takes up the screen dimensions */
+		DrawShape( texture2, win.GetWidth() / 2, win.GetHeight() / 2, win.GetWidth(), win.GetHeight(), 0.0f );
+
+		/* Foreground drawing routine */
 		for ( u_int y = 0; y < map.GetHeight(); y++ ) {
 			for ( u_int x = 0; x < map.GetWidth(); x++ ) {
 				u_short spx = map.GetTileWidth()/2 + map.GetTileWidth()*x;
 				u_short spy = map.GetTileHeight()/2 + map.GetTileHeight()*y;
-				if ( map.GetTile( x, y ) ) DrawShape( spx, spy, map.GetTileWidth(), map.GetTileHeight(), 0.0f );
+				if ( map.GetTile( x, y ) ) DrawShape( texture, spx, spy, map.GetTileWidth(), map.GetTileHeight(), 0.0f );
 			}
 		}
 	};

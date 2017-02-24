@@ -26,6 +26,7 @@
     <ClCompile Include="Common\Graphics\VAO\Texture2DVAO.cpp" />
     <ClCompile Include="Display\Display.cpp" />
     <ClCompile Include="Map.cpp" />
+    <ClCompile Include="Player.cpp" />
     <ClCompile Include="Test.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -44,6 +45,7 @@
     <ClInclude Include="Common\Graphics\Vertex\Vertex.h" />
     <ClInclude Include="Display\Display.h" />
     <ClInclude Include="Map.h" />
+    <ClInclude Include="Player.h" />
     <ClInclude Include="System\Error.h" />
     <ClInclude Include="System\Out.h" />
     <ClInclude Include="Utils\IO.h" />

@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Common\Types.h"
+#include <glm\glm.hpp>
 
 /* 16:9 aspect ratio */
 #define WINDOW_WIDTH 1280
@@ -14,6 +15,8 @@ class Map {
 		u_short	tileWidth, tileHeight;
 		u_byte	width, height;
 		u_int	*map;
+
+		glm::vec2 viewport;
 
 	public:
 		Map ( u_byte width, u_byte height, u_int *map );
@@ -29,4 +32,6 @@ class Map {
 
 		inline u_short GetTileWidth () { return tileWidth; }
 		inline u_short GetTileHeight () { return tileHeight; }
+
+		inline glm::vec2& GetViewport () { return viewport; }
 };
