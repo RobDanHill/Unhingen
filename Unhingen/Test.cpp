@@ -30,7 +30,16 @@
 
 #define ASPECT ( float ) WINDOW_WIDTH / ( float ) WINDOW_HEIGHT
 
+typedef struct Player_t {
+	glm::vec2 map;
+	glm::vec2 screen;
+	glm::vec2 tile;
+	glm::vec2 size;
+} Player;
+
 int main ( int argc, char *argv[] ) {
+	u_int startTime = SDL_GetTicks();
+
 	tuDisplay win( WINDOW_WIDTH, WINDOW_HEIGHT, "Test Window" );
 	tuShader texShader( "./Res/Shaders/Texture" );
 	tuShader colorShader( "./Res/Shaders/Test" );
@@ -64,6 +73,7 @@ int main ( int argc, char *argv[] ) {
 
 	tuTex2D texture( "./Res/Images/BasicBrickedTile.png" );
 	tuTex2D texture2( "./Res/Images/DukeNukem3D.png" );
+	tuTex2D playertex( "./Res/Images/alucardIdle1.png" );
 
 	tuOrthographicCamera orthocam( glm::vec3( 0.0f, 0.0f, 0.0f ), 0.0f, ( float ) WINDOW_WIDTH, ( float ) WINDOW_HEIGHT, 0.0f, -1.0f, 1.0f );
 	tuPerspectiveCamera perspcam( glm::vec3( 0.0f, 0.0f, 3.0f ), 70.0f, ASPECT, 0.01f, 1000.0f );
@@ -101,6 +111,14 @@ int main ( int argc, char *argv[] ) {
 
 	float counter = 0.0f;
 
+	/* Init player */
+	Player player;
+	player.tile.x = 5; player.tile.y = 7;
+	player.size.x = map.GetTileWidth(); player.size.y = map.GetTileHeight();
+	player.map.x = player.tile.x*map.GetTileWidth() + map.GetTileWidth() / 2;
+	player.map.y = player.tile.y*map.GetTileHeight() + map.GetTileHeight() / 2;
+	player.screen.x = player.map.x; player.screen.y = player.map.y;
+
 	auto DrawShape = [&]( tuTex2D& texture, u_short x, u_short y, u_short width, u_short height, float angle ) -> void {
 		texShader.Bind();
 		texture.Bind();
@@ -117,7 +135,7 @@ int main ( int argc, char *argv[] ) {
 		texShader.Unbind();
 	};
 
-	auto DrawMap = [&]( float counter ) -> void {
+	auto DrawMap = [&]( float angle ) -> void {
 		/* Background drawing routine - Draw one quad that takes up the screen dimensions */
 		DrawShape( texture2, win.GetWidth() / 2, win.GetHeight() / 2, win.GetWidth(), win.GetHeight(), 0.0f );
 
@@ -126,33 +144,49 @@ int main ( int argc, char *argv[] ) {
 			for ( u_int x = 0; x < map.GetWidth(); x++ ) {
 				u_short spx = map.GetTileWidth()/2 + map.GetTileWidth()*x;
 				u_short spy = map.GetTileHeight()/2 + map.GetTileHeight()*y;
-				if ( map.GetTile( x, y ) ) DrawShape( texture, spx, spy, map.GetTileWidth(), map.GetTileHeight(), 0.0f );
+				if ( map.GetTile( x, y ) ) DrawShape( texture, spx, spy, map.GetTileWidth(), map.GetTileHeight(), angle );
 			}
 		}
 	};
 
+	u_int deltaTime, oldTime = deltaTime = 0;
+
 	while ( win.IsRunning() ) {
+		oldTime = startTime;
+		startTime = SDL_GetTicks();
+
+		player.tile.x = player.map.x / map.GetTileWidth();
+		player.tile.y = player.map.y / map.GetTileHeight();
+		//player.map.x = player.tile.x*map.GetTileWidth() + map.GetTileWidth() / 2;
+		//player.map.y = player.tile.y*map.GetTileHeight() + map.GetTileHeight() / 2;
+		player.screen.x = player.map.x; player.screen.y = player.map.y;
+
 		win.Clear();
 
 		//DrawShape( win.GetWidth() / 2 - cosf( counter ) * win.GetWidth() / 2, win.GetHeight() / 2 + sinf( counter ) * win.GetHeight() / 2, 500, 400, counter );
 		//DrawShape( win.GetWidth() / 2 + sinf( counter ) * win.GetWidth() / 2, win.GetHeight() / 2, 80, 80, 0.0f );
 
-		DrawMap( counter );
+		DrawMap( 0.0f );
+		DrawShape( playertex, player.screen.x, player.screen.y, player.size.x, player.size.y, 0.0f );
 
 		win.Update();
 
 		for ( SDL_Event e; SDL_PollEvent( &e ); ) {
 			switch ( e.type ) {
-				case SDL_QUIT: win.Close(); break;
-				case SDL_KEYUP:
+				case SDL_QUIT:	win.Close(); break;
+				case SDL_KEYDOWN:
 					switch ( e.key.keysym.sym ) {
-						case SDLK_ESCAPE: win.Close(); break;
+						case SDLK_ESCAPE:	win.Close(); break;
+						case SDLK_RIGHT:	player.map.x += ( float ) deltaTime / 1000.0f; break;
+						case SDLK_LEFT:		player.map.x -= ( float ) deltaTime / 1000.0f; break;
 					}
 					break;
 			}
 		}
 
 		counter += 0.01f;
+
+		deltaTime = startTime - oldTime;
 	}
 
 	return 0;
