@@ -69,7 +69,7 @@ int main ( int argc, char *argv[] ) {
 
 	std::vector<tuTex2DVertex> v = utils::ToExplicitVector( quad, sizeof( quad ) / sizeof( quad[0] ) );
 	std::vector<u_int> i = utils::ToExplicitVector( quadIndices, sizeof( quadIndices ) / sizeof( quadIndices[0] ) );
-	tuTex2DVAO vao( v, i );
+	tuTex2DVAO vao( v, i ), playervao( v, i );
 
 	tuTex2D texture( "./Res/Images/BasicBrickedTile.png" );
 	tuTex2D texture2( "./Res/Images/DukeNukem3D.png" );
@@ -119,7 +119,7 @@ int main ( int argc, char *argv[] ) {
 	player.map.y = player.tile.y*map.GetTileHeight() + map.GetTileHeight() / 2;
 	player.screen.x = player.map.x; player.screen.y = player.map.y;
 
-	auto DrawShape = [&]( tuTex2D& texture, u_short x, u_short y, u_short width, u_short height, float angle ) -> void {
+	auto DrawShape = [&]( tuTex2DVAO& vao, tuTex2D& texture, u_short x, u_short y, u_short width, u_short height, float angle ) -> void {
 		texShader.Bind();
 		texture.Bind();
 
@@ -137,14 +137,14 @@ int main ( int argc, char *argv[] ) {
 
 	auto DrawMap = [&]( float angle ) -> void {
 		/* Background drawing routine - Draw one quad that takes up the screen dimensions */
-		DrawShape( texture2, win.GetWidth() / 2, win.GetHeight() / 2, win.GetWidth(), win.GetHeight(), 0.0f );
+		DrawShape( vao, texture2, win.GetWidth() / 2, win.GetHeight() / 2, win.GetWidth(), win.GetHeight(), 0.0f );
 
 		/* Foreground drawing routine */
 		for ( u_int y = 0; y < map.GetHeight(); y++ ) {
 			for ( u_int x = 0; x < map.GetWidth(); x++ ) {
 				u_short spx = map.GetTileWidth()/2 + map.GetTileWidth()*x;
 				u_short spy = map.GetTileHeight()/2 + map.GetTileHeight()*y;
-				if ( map.GetTile( x, y ) ) DrawShape( texture, spx, spy, map.GetTileWidth(), map.GetTileHeight(), angle );
+				if ( map.GetTile( x, y ) ) DrawShape( vao, texture, spx, spy, map.GetTileWidth(), map.GetTileHeight(), angle );
 			}
 		}
 	};
@@ -167,7 +167,7 @@ int main ( int argc, char *argv[] ) {
 		//DrawShape( win.GetWidth() / 2 + sinf( counter ) * win.GetWidth() / 2, win.GetHeight() / 2, 80, 80, 0.0f );
 
 		DrawMap( 0.0f );
-		DrawShape( playertex, player.screen.x, player.screen.y, player.size.x, player.size.y, 0.0f );
+		DrawShape( playervao, playertex, player.screen.x, player.screen.y, player.size.x, player.size.y, 0.0f );
 
 		win.Update();
 
@@ -177,8 +177,8 @@ int main ( int argc, char *argv[] ) {
 				case SDL_KEYDOWN:
 					switch ( e.key.keysym.sym ) {
 						case SDLK_ESCAPE:	win.Close(); break;
-						case SDLK_RIGHT:	player.map.x += ( float ) deltaTime / 1000.0f; break;
-						case SDLK_LEFT:		player.map.x -= ( float ) deltaTime / 1000.0f; break;
+						case SDLK_RIGHT:	player.map.x += 1.0f*deltaTime/5.0f; break; //( float ) ( deltaTime / 1000.0f )
+						case SDLK_LEFT:		player.map.x -= 1.0f*deltaTime/5.0f; break; //( float ) ( deltaTime / 1000.0f )
 					}
 					break;
 			}
