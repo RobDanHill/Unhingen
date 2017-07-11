@@ -2,7 +2,7 @@
 
 #include <glm\glm.hpp>
 
-BasicVAO::BasicVAO ( Vertex *vertices, u_int numVertices ) {
+tuBasicVAO::tuBasicVAO ( tuVertex *vertices, u_int numVertices ) {
 	drawCount = numVertices;
 	
 	std::vector<glm::vec3> positions;
@@ -28,17 +28,17 @@ BasicVAO::BasicVAO ( Vertex *vertices, u_int numVertices ) {
 	glBindVertexArray( 0 ); //-----------------------------------------------------
 }
 
-void BasicVAO::Draw () const {
+void tuBasicVAO::Draw () const {
 	glDrawArrays( GL_TRIANGLES, 0, drawCount );
 }
 
-void BasicVAO::Render () const {
+void tuBasicVAO::Render () const {
 	Bind();
 	Draw();
 	Unbind();
 }
 
-BasicVAO::~BasicVAO () {
+tuBasicVAO::~tuBasicVAO () {
 	delete[] vbo;
 	glDeleteVertexArrays( 1, &vao );
 }

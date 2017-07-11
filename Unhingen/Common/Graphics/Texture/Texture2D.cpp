@@ -4,7 +4,7 @@
 #include <SDL2\SDL_image.h>
 #include "..\System\Error.h"
 
-Texture2D::Texture2D ( const std::string& fileName ) {
+tuTex2D::tuTex2D ( const std::string& fileName ) {
 	SDL_Surface *image = IMG_Load( fileName.c_str() );
 	if ( image == null ) {
 		err::SDL_image_ErrMsg( "Error occurred loading \"" + fileName + "\"!" );
@@ -26,17 +26,17 @@ Texture2D::Texture2D ( const std::string& fileName ) {
 	SDL_FreeSurface( image );
 }
 
-void Texture2D::Bind () {
+void tuTex2D::Bind () {
 	/*assert( unit >= 0 && unit <= 31 );
 	glActiveTexture( GL_TEXTURE0 + unit );*/
 	glActiveTexture( GL_TEXTURE0 );
 	glBindTexture( GL_TEXTURE_2D, textureHandle );
 }
 
-void Texture2D::Unbind () {
+void tuTex2D::Unbind () {
 	glBindTexture( GL_TEXTURE_2D, 0 );
 }
 
-Texture2D::~Texture2D () {
+tuTex2D::~tuTex2D () {
 	glDeleteTextures( 1, &textureHandle );
 }

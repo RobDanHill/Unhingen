@@ -7,11 +7,11 @@
 #include <glm\glm.hpp>
 #include <vector>
 
-class VAO {
+class tuVAO_a {
 	public:
 		inline void Bind () const { glBindVertexArray( vao ); }
 		inline void Unbind () const { glBindVertexArray( 0 ); }
-		inline ModelTransform& GetTransform () { return transform; }
+		inline tuModelTransform& GetTransform () { return transform; }
 		virtual void Draw () const = 0;
 		virtual void Render () const = 0;
 	protected:
@@ -19,5 +19,5 @@ class VAO {
 		GLuint				*vbo;
 		u_int				drawCount;
 		std::vector<u_int>	indices;
-		ModelTransform		transform;
+		tuModelTransform		transform;
 };

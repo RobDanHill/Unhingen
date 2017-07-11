@@ -2,9 +2,9 @@
 
 #include <glm\glm.hpp>
 
-class Vertex {
+class tuVertex {
 	public:
-		Vertex ( const glm::vec3& position ) {
+		tuVertex ( const glm::vec3& position ) {
 			this->position = position;
 		}
 		inline glm::vec3 GetPosition () const { return position; }

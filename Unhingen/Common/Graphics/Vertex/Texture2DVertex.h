@@ -2,10 +2,10 @@
 
 #include "Vertex.h"
 
-class Texture2DVertex : public Vertex {
+class tuTex2DVertex : public tuVertex {
 	public:
-		Texture2DVertex ( const glm::vec3& position, const glm::vec2& texCoord )
-			: Vertex( position ) {
+		tuTex2DVertex ( const glm::vec3& position, const glm::vec2& texCoord )
+			: tuVertex( position ) {
 			this->texCoord = texCoord;
 		}
 		inline glm::vec2 GetTexCoord () const { return texCoord; }
